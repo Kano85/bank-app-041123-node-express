@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Willkommen bei der Alfa Banking App</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header text-center">
+              <h2>Willkommen bei der Alfa Banking App</h2>
+            </div>
+            <div class="card-body text-center">
+              <h3>Hola, <%= user.username %>!</h3>
+              <p>Ihre Bankkonten sind unten aufgeführt:</p>
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Kontonummer</th>
+                    <th>Kontostand</th>
+                    <th>Kontotyp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if (accounts && accounts.length > 0) { %> <%
+                  accounts.forEach(account => { %>
+                  <tr>
+                    <td>
+                      <a
+                        href="/accounts/<%= account.id %>/transactions?username=<%= user.username %>"
+                        ><%= account.accountNumber %></a
+                      >
+                    </td>
+
+                    <td>$<%= account.balance %></td>
+                    <td><%= account.accountType %></td>
+                  </tr>
+                  <% }) %> <% } else { %>
+                  <tr>
+                    <td colspan="3">Keine Konten gefunden.</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+
+              <a href="/logout" class="btn btn-secondary mt-3">Abmelden</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
