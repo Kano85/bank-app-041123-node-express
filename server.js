@@ -13,55 +13,33 @@ import authRoutes from './routes/authRoutes.js';
 import accountRoutes from './routes/accountRoutes.js';
 import transactionRoutes from './routes/transactionRoutes.js';
 
-const APP = express();
-const IP = '127.0.0.1';
-const PORT = 8081;
+const app = express();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-APP.set('view engine', 'ejs');
-APP.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'));
 
-APP.use(express.static('public'));
-APP.use(express.json());
-APP.use(express.urlencoded({ extended: true }));
-APP.use(morgan('tiny'));
+app.use(express.static('public'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('tiny'));
 
-APP.use('/', authRoutes);
-APP.use('/users', accountRoutes);
-APP.use('/accounts', transactionRoutes);
+app.use('/', authRoutes);
+app.use('/users', accountRoutes);
+app.use('/accounts', transactionRoutes);
 
 sequelize
-  .sync({ force: true })
+  .sync()
   .then(async () => {
     console.log('Database & tables created!');
-
-    const users = await user.bulkCreate([
-      { username: 'jessy', password: '1111' },
-      { username: 'luke', password: '2222' },
-    ]);
-
-    const accounts = await account.bulkCreate([
-      { accountNumber: 'ACC123', balance: 500, userId: users[0].id },
-      { accountNumber: 'ACC456', balance: 1000, userId: users[1].id },
-    ]);
-
-    await transaction.bulkCreate([
-      { transactionType: 'deposit', amount: 200, accountId: accounts[0].id },
-      { transactionType: 'withdrawal', amount: 100, accountId: accounts[0].id },
-      { transactionType: 'deposit', amount: 500, accountId: accounts[1].id },
-      { transactionType: 'withdrawal', amount: 300, accountId: accounts[1].id },
-    ]);
-
-    console.log('Users, accounts, and transactions seeded!');
+    // Seed initial data here if needed
   })
   .catch((err) => console.error('Database sync error:', err));
 
-APP.listen(PORT, IP, () => {
-  console.log(`Server running at http://${IP}:${PORT}`);
-});
-
-APP.use((req, res) => {
+app.use((req, res) => {
   res.status(404).render('404', { title: '404 - Not Found' });
 });
+
+export default app;

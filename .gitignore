@@ -24,3 +24,4 @@ Thumbs.db
 # Git and editor settings
 .vscode/
 .idea/
+.vercel

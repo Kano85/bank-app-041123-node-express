@@ -7,13 +7,3 @@ export const validateLoginBody = (req, res, next) => {
 
   next();
 };
-
-// export default (req, res, next) => {
-//   const username = req.query.username;
-
-//   if (username) {
-//     next(); // If the username exists, proceed to the next middleware/route
-//   } else {
-//     res.redirect('/'); // If no username, redirect to login page
-//   }
-// };

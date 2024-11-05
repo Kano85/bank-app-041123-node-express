@@ -61,3 +61,65 @@ This app provides an example of using **Node.js** and **Express.js** to build se
 ├── server.js            # Main server file
 └── .gitignore           # Git ignore file
 ```
+
+🚀 Getting Started
+Prerequisites
+Node.js (v12 or higher)
+SQLite (or any other preferred database)
+Installation
+Clone the repository:
+
+bash
+Copy code
+git clone https://github.com/Kano85/bank-app-041123-node-express.git
+cd bank-app-041123-node-express
+Install dependencies:
+
+npm install
+Configure environment variables:
+
+Create a .env file with required database and environment configurations. Example:
+
+DB_PATH=./database.sqlite
+SESSION_SECRET=yourSecretKey
+Run the app:
+
+npm start
+The app will start running on http://127.0.0.1:8081.
+
+📝 Usage
+Accessing the Server Locally
+URL: Open a browser or API client (like Postman) and navigate to:
+
+http://127.0.0.1:8081
+Available Pages:
+
+/: Homepage
+/register: Sign up a new user
+/login: Log in with user credentials
+/accounts: Manage user accounts
+/transactions: View transaction history
+Default Users and Login Details
+The server seeds the database with initial data, including default users and accounts.
+
+Default Users:
+
+Username: jessy
+
+Password: 1111
+Account: ACC123
+Initial Balance: $500
+Username: luke
+
+Password: 2222
+Account: ACC456
+Initial Balance: $1000
+Note: These default credentials are for testing purposes. You can log in using these accounts or register new ones.
+
+Account Management
+Create Account: Set up a new bank account under your user profile.
+View Accounts: See all accounts linked to your user.
+Transactions
+Deposit Funds: Add funds to a specified account.
+Withdraw Funds: Withdraw available funds from an account.
+View Transaction History: See the transaction history for each account.
